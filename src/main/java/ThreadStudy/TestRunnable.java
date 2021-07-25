@@ -6,7 +6,7 @@ public class TestRunnable implements Runnable{
     public void run(){
         //run 方法载体
         for (int i = 0; i < 20; i++) {
-            System.out.println("Run Thread: " + i);
+            System.out.println("Run Thread--> " + i);
         }
     }
 
@@ -16,8 +16,19 @@ public class TestRunnable implements Runnable{
         //创建线程对象，通过线程对象开启线程，代理
         new Thread(testRunnable).start();
 
+        //有时调用Thread(Runnable)构造方法时，实参也会传递匿名内部类对象
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 20; i++) {
+                    System.out.println("Run Thread-------------------------> " + i);
+                }
+            }
+        });
+        thread.start();
+
         for (int i = 0; i < 20; i++) {
-            System.out.println("Main Thread: " + i);
+            System.out.println("Main Thread-->: " + i);
         }
     }
 }
